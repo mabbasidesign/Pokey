@@ -24,15 +24,14 @@ class Home extends Component {
         (
             posts.map( post => {
                 return(
-                <div className='card'>
+                <div className='card' key={post.id}>
                     <div className='card-content'>
                         {/* <Link to={'/' + post.id}><span className='card-title'>{post.title}</span></Link> */}
-                        <Link to={'/' + post.id} >
+                        <Link to={'/post/' + post.id} >
                             <span className="card-title">{post.title}</span>
                         </Link>
                         <p>{post.body}</p>
                     </div>
-
                 </div>
                 )
             })

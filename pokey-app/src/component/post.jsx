@@ -27,10 +27,23 @@ class Post extends Component {
             });
         }
 
-    render() { 
+    render() {
+
+        const post = (this.state.post)?
+        (
+            <div className='post'>
+                <div className='card-content'>
+                    <h5 className='title'>{this.state.post.title}</h5>
+                    <p>{this.state.post.body}</p>
+                </div>
+            </div>
+        ):
+        ( <div> No post ... </div> );
+
         return ( 
             <div className='container'>
                 <h1>Post</h1>
+                <div>{post}</div>
             </div>
          );
     }
