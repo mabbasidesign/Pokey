@@ -19,6 +19,7 @@ class App extends Component {
            <Route path="/about" component={About} />
            <Route path="/contact" component={contact} />
            {/* <Route path="/:post_id" component={Post} /> */}
+           <Route path="/:post_id" component={Post} />
           </Switch>
         </div>
       </BrowserRouter>
