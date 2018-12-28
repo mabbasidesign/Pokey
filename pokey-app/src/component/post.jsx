@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { deletePost } from '../action/postAction';
 
 class Post extends Component {
     state = { 
@@ -27,14 +29,20 @@ class Post extends Component {
             });
         }
 
+    handleDelete = () => {
+        this.props.deletePost(this.props.post.id);
+        this.props.history.push('/');
+    }
+
     render() {
 
-        const post = (this.state.post)?
+        const post = (this.props.post)?
         (
             <div className='post'>
                 <div className='card-content'>
-                    <h5 className='title'>{this.state.post.title}</h5>
-                    <p>{this.state.post.body}</p>
+                    <h5 className='title'>{this.props.post.title}</h5>
+                    <p>{this.props.post.body}</p>
+                    <button onClick={() => this.handleDelete()} >Delete</button>
                 </div>
             </div>
         ):
@@ -48,5 +56,29 @@ class Post extends Component {
          );
     }
 }
- 
-export default Post;
+
+const mapStateToProps = (state, ownProps) => {
+    const id = ownProps.match.params.post_id;
+    return {
+        post: state.posts.find( (p) => {
+            return p.id === id;
+        })
+    }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         // deletePost: (id) => {dispatch ({ type: 'DELETE_POST', id: id }) }
+//         deletePost: (id) => {dispatch (deletePost(id)) }
+//     }
+// }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // deletePost: (id) => {dispatch ({ type: 'DELETE_POST', id: id }) }
+        deletePost: (id) => {dispatch (deletePost(id)) }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
