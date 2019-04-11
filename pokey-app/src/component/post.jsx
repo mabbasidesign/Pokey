@@ -4,30 +4,22 @@ import { connect } from 'react-redux';
 import { deletePost } from '../action/postAction';
 
 class Post extends Component {
-    state = { 
-        post: null
-    }
 
-    // componentDidMount(){
-    //     let id = this.props.match.params.post_id;
-    //     axios.get('https://jsonplaceholder.typicode.com/posts' + id)
-    //     .then( res => {
-    //         console.log(res)
-    //         this.state({ post: res.data })
-    //     });
+    // state = { 
+    //     post: null
     // }
 
-    componentDidMount () {
-            // console.log(this.props);
-            let id = this.props.match.params.post_id;
-            axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
-            .then(res => {
-                this.setState({
-                    post: res.data
-                })
-                console.log(res);
-            });
-        }
+    //   componentDidMount () {
+    //         // console.log(this.props);
+    //         let id = this.props.match.params.post_id;
+    //         axios.get('https://jsonplaceholder.typicode.com/posts/' + id)
+    //         .then(res => {
+    //             this.setState({
+    //                 post: res.data
+    //             })
+    //             console.log(res);
+    //         });
+    //     }
 
     handleDelete = () => {
         this.props.deletePost(this.props.post.id);
@@ -42,7 +34,7 @@ class Post extends Component {
                 <div className='card-content'>
                     <h5 className='title'>{this.props.post.title}</h5>
                     <p>{this.props.post.body}</p>
-                    <button onClick={() => this.handleDelete()} >Delete</button>
+                    <button className="btn gray" onClick={this.handleDelete}> Delete </button>
                 </div>
             </div>
         ):
@@ -66,16 +58,9 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         // deletePost: (id) => {dispatch ({ type: 'DELETE_POST', id: id }) }
-//         deletePost: (id) => {dispatch (deletePost(id)) }
-//     }
-// }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // deletePost: (id) => {dispatch ({ type: 'DELETE_POST', id: id }) }
         deletePost: (id) => {dispatch (deletePost(id)) }
     }
 }
